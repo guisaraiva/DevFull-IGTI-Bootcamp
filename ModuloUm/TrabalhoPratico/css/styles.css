@@ -1,0 +1,31 @@
+
+#container {
+  border-style: solid;
+  background-color: yellow;
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.labelRed, .spanRed {
+  font-size: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  color: red;
+}
+.labelGreen, .spanGreen {
+  font-size: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  color: green;
+}
+.labelBlue, .spanBlue {
+  font-size: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  color: blue;
+}
+.xxx{
+  width: 50%;
+  background-color: red;
+}
