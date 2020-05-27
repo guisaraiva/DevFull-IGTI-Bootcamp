@@ -22,3 +22,69 @@ Dicas:
     Não deixem de assistir o vídeo desse desafio, onde demonstro a aplicação em funcionamento e dou mais algumas dicas.
 
  
+07174 
+
+24*992132195 vilma 
+
+
+function renderSummaryContacts(){
+  countCountries.textContent = allContacts.length;
+}
+
+function filterContactsMenAndWomen(){
+  const totalContactsMen = allContacts.filter(person =>{
+    return person.gender === "male"
+  })
+  const totalContactsWomen = allContacts.filter(person =>{
+    return person.gender === "female"
+  })
+  countMen.textContent = totalContactsMen.length;
+  countWomen.textContent = totalContactsWomen.length;
+}
+
+function summaryAges() {
+  const totalAges = allContacts.reduce((accumulator, current) =>{
+    return accumulator + current.ageContact;
+  },0)
+  
+  sumAges.textContent = totalAges;
+}
+function myFunction() {
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.querySelector("#myInput");
+  filter = input.value.toUpperCase();
+  ul = document.querySelector("#myUL");
+  li = ul.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+      } else {
+          li[i].style.display = "none";
+      }
+  }
+}
+
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+
+<img src="${photo.thumbnail}" alt="Image" />
+
+       <li id="li"><a>${name.first}</a></li>   
+	   
+	   https://pt.stackoverflow.com/questions/121115/filtrar-elementos-de-uma-lista-e-mostrar-em-outra
+	   
+	   https://www.w3schools.com/howto/howto_js_filter_lists.asp
+	   
+	   
+	   https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_list
+	   
+	   https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_list
+	   
+	   https://medium.com/@programadriano/javascript-conhecendo-map-filter-e-reduce-ce072d8f0ec5
+	   
+	   https://maujor.com/tutorial/10-exemplos-de-funcionalidades-es6.php
+	   
+	   https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/filtro
