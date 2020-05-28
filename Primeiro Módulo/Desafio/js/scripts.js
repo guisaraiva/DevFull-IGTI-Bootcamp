@@ -1,7 +1,7 @@
 // Declaração das variáveis que serão utilizadas no projeto.
-let countlMen = 0;
-let countWomen = 0;
-let sumAges = 0;
+let sumGenderMale = 0;
+let sumGenderFemale = 0;
+let sumAgesContacts = 0;
 let averageAges =0;
 let countCountries = 0;
 let tabCountries = null;
@@ -11,11 +11,17 @@ let clickButton = null;
 let inputName = null;
 let hasText = null;
 
+let valueTotalContacts = 0;
+
 window.addEventListener('load', ()=>{
-  clickButton = document.querySelector('#clickButton')
+  sumGenderMale = document.querySelector('#countMen');
+  sumGenderFemale = document.querySelector('#countWomen');
+  clickButton = document.querySelector('#clickButton');
   countCountries = document.querySelector('#countCountries');
   tabCountries = document.querySelector('#tabCountries');
   inputName = document.querySelector('#getContact')
+  averageAges = document.querySelector('#countFavorites');
+  sumAgesContacts = document.querySelector('#sumAges');
   getContacts();
 })
 
@@ -33,6 +39,7 @@ async function getContacts (){
         gender: gender
       }
   });
+  
   render();
 }
 
@@ -44,10 +51,16 @@ function renderContactsList(){
   function handleTyping(event){
     hasText = event.target.value.toLowerCase();
     if(event.key === 'Enter'){
+      sumGenderMale = 0;
+      sumGenderFemale = 0;
+      valueTotalContacts = 0;
+      sumAgesContacts = 0;
+      averageAges = 0;
       let contactsHTML = "<div>";  
       for(let i = 0; i < allContacts.length; i++){
-          let firsta = allContacts[i].first.toLowerCase().includes(hasText);
-          if(firsta){
+          let pName = allContacts[i].first.toLowerCase().includes(hasText);
+          let fName = allContacts[i].lastName.toLowerCase().includes(hasText);
+          if(pName || fName){
                const { first, lastName, age, picture, gender } = allContacts[i];
                const contactHTML = `
                <div class="country">
@@ -57,10 +70,26 @@ function renderContactsList(){
                </div>    
                `
                contactsHTML += contactHTML;
+               valueTotalContacts ++;
+               averageAges += age;
+               
+               if(gender === 'female'){
+                sumGenderFemale ++
+               }
+               else{
+                sumGenderMale ++
+               }
             }
+            countCountries.textContent = valueTotalContacts;
+            countFavorites.textContent = ((averageAges/valueTotalContacts).toFixed(2));
+            
+
         }
         contactsHTML += "</div>";
         tabCountries.innerHTML = contactsHTML;
+        countWomen.textContent = sumGenderFemale;
+        countMen.textContent = sumGenderMale;
+        sumAges.textContent = averageAges;
 }}
   inputName.addEventListener('keyup', handleTyping)
   inputName.focus()
