@@ -1,14 +1,43 @@
 const express = require('express');
+const fs = require('fs').promises;
 const app = express(); // Criando uma instância do express;
+const accounsRouter = require('./routes/accounts.js');
+const winston = require ('winston');
 
-app.get('/', (req, res) => {// Criando uma requisição através do APP;
-  res.send('Hello Word - Guilherme');
+global.fileName = 'accounts.json';
+
+const { combine, timestamp, label, printf} = winston.format;
+const myFormat = printf(({level, message, label, timestamp})=>{
+  return `${timestamp} [${label}] ${level}: ${message}`;
+})
+global.logger = winston.createLogger({
+  level: "silly",
+  transports: [
+    new (winston.transports.Console)(),
+    new (winston.transports.File)({filename: "my-bank-api"})
+  ],
+  format: combine(
+    label({ label: "my-bank-api"}),
+    timestamp(),
+    myFormat
+  )
 });
 
-app.post('/account',(req, res)=>{
-  console.log("post account")
-})
+app.use(express.json());
+app.use('/account', accounsRouter);
 
-app.listen(3000, () => {// Abrindo a porta da aplicação.
-  console.log('API started');
+app.listen(3000, async () => {
+  // Abrindo a porta da aplicação.
+  try {
+    await fs.readFile(global.fileName, 'utf8');
+    logger.info('API started');
+  } catch (err) {
+      const initialJson = {
+        nextId: 1,
+        accounts: [],
+      };
+      fs.writeFile(global.fileName, JSON.stringify(initialJson)).catch( err =>{
+        logger.error(err);
+      })
+  };
 });
