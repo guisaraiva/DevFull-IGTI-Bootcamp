@@ -11,7 +11,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}\\2º - Módulo - API\\Scritps\\API\\index.js"
+      "program": "${workspaceFolder}\\2º - Módulo - API\\Desafio Módulo\\API\\index.js"
     }
   ]
 }
